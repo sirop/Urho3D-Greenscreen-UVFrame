@@ -148,7 +148,7 @@ void UVFrame::UpdateUVFrame()
             }
             else
             {
-                SetUpdateEventMask(0);
+                SetEnabled(false);
             }
         }
 

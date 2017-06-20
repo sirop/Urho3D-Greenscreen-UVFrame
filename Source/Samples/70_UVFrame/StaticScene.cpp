@@ -170,7 +170,7 @@ Node* StaticScene::CreateUVFrame(const String &name)
     node->SetPosition(Vector3(0,1.0f,0));
     BillboardSet *bbset = node->CreateComponent<BillboardSet>();
     bbset->SetNumBillboards(1);
-    bbset->SetMaterial(cache->GetResource<Material>(String("UVFrame/Sequences/") + name + String("MatAlpha.xml")));
+    bbset->SetMaterial(cache->GetResource<Material>(String("UVFrame/Sequences/") + name + String("MatAlpha.xml"))->Clone());
     bbset->SetFaceCameraMode(FC_ROTATE_Y);
 
     Vector2 bsize(3.0f, 3.0f);

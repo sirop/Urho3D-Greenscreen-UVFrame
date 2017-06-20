@@ -53,6 +53,7 @@ public:
     virtual void DelayedStart();
     bool SetEnabled(bool enable);
     bool Reset();
+    bool IsEnabled() const { return enabled_; }
 
 protected:
     virtual void Update(float timeStep);
