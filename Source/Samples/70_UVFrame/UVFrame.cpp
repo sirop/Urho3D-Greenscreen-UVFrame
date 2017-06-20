@@ -99,7 +99,7 @@ bool UVFrame::SetEnabled(bool enable)
 
     if (enabled_)
     {
-        SetUpdateEventMask(USE_FIXEDUPDATE);
+        SetUpdateEventMask(USE_UPDATE);
     }
     else
     {
