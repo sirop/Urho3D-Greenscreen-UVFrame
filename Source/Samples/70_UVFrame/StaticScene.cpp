@@ -153,16 +153,17 @@ void StaticScene::CreateScene()
 void StaticScene::CreateSequencers()
 {
     // uv frame sequencers
-    nodeList_.Push(CreateUVFrame(String("dirt1/dirt")));
-    nodeList_.Push(CreateUVFrame(String("dirt2/dirt")));
-    nodeList_.Push(CreateUVFrame(String("bigfire/bigfire")));
-    nodeList_.Push(CreateUVFrame(String("explosion1/explosion")));
+    nodeList_.Push(CreateUVFrame("dirt1_", "UVFrame/Sequences/dirt1/dirt",           Vector2(3.0f, 3.0f)));
+    nodeList_.Push(CreateUVFrame("dirt2_", "UVFrame/Sequences/dirt2/dirt",           Vector2(3.0f, 3.0f)));
+    nodeList_.Push(CreateUVFrame("fire1_", "UVFrame/Sequences/bigfire/bigfire",      Vector2(3.0f, 3.0f)));
+    nodeList_.Push(CreateUVFrame("expl1_", "UVFrame/Sequences/explosion1/explosion", Vector2(3.0f, 3.0f)));
+    nodeList_.Push(CreateUVFrame("expl2_", "UVFrame/Sequences/explosion2/explosion", Vector2(4.0f, 3.0f)));
 
     nodeIdx_ = 0;
     nodeList_[nodeIdx_]->SetEnabled(true);
 }
 
-Node* StaticScene::CreateUVFrame(const String &name)
+Node* StaticScene::CreateUVFrame(const String &name, const String &path, const Vector2 &bsize)
 {
     ResourceCache* cache = GetSubsystem<ResourceCache>();
     Node *node = scene_->CreateChild(name);
@@ -170,17 +171,16 @@ Node* StaticScene::CreateUVFrame(const String &name)
     node->SetPosition(Vector3(0,1.0f,0));
     BillboardSet *bbset = node->CreateComponent<BillboardSet>();
     bbset->SetNumBillboards(1);
-    bbset->SetMaterial(cache->GetResource<Material>(String("UVFrame/Sequences/") + name + String("MatAlpha.xml"))->Clone());
+    bbset->SetMaterial(cache->GetResource<Material>(path + String("MatAlpha.xml")));
     bbset->SetFaceCameraMode(FC_ROTATE_Y);
 
-    Vector2 bsize(3.0f, 3.0f);
     bbset->GetBillboard(0)->size_ = bsize;
     bbset->GetBillboard(0)->position_ = Vector3(0, bsize.y_ * 0.5f, 0);
     bbset->GetBillboard(0)->enabled_ = true;
     bbset->Commit();
 
     UVFrame *uvFrame = node->CreateComponent<UVFrame>();
-    XMLFile *xmlDat = cache->GetResource<XMLFile>(String("UVFrame/Sequences/") + name + String("UVFrame.xml"));
+    XMLFile *xmlDat = cache->GetResource<XMLFile>(path + String("UVFrame.xml"));
     uvFrame->LoadXML(xmlDat->GetRoot());
 
     return node;

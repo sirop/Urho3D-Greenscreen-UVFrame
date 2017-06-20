@@ -53,7 +53,7 @@ private:
     /// Construct the scene content.
     void CreateScene();
     void CreateSequencers();
-    Node* CreateUVFrame(const String &name);
+    Node* CreateUVFrame(const String &name, const String &path, const Vector2 &bsize);
     /// Construct an instruction text to the UI.
     void CreateInstructions();
     /// Set up a viewport for displaying the scene.
