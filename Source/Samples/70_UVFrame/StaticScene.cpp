@@ -159,6 +159,8 @@ void StaticScene::CreateSequencers()
     nodeList_.Push(CreateUVFrame("expl1_", "UVFrame/Sequences/explosion1/explosion", Vector2(3.0f, 3.0f)));
     nodeList_.Push(CreateUVFrame("expl2_", "UVFrame/Sequences/explosion2/explosion", Vector2(4.0f, 3.0f)));
     nodeList_.Push(CreateUVFrame("expl3_", "UVFrame/Sequences/explosion3/explosion", Vector2(4.0f, 3.0f)));
+    nodeList_.Push(CreateUVFrame("expl4_", "UVFrame/Sequences/explosion4/explosion", Vector2(3.0f, 3.0f)));
+    nodeList_.Push(CreateUVFrame("expl5_", "UVFrame/Sequences/explosion5/explosion", Vector2(3.0f, 3.0f)));
 
     nodeIdx_ = 0;
     nodeList_[nodeIdx_]->SetEnabled(true);
@@ -195,7 +197,7 @@ void StaticScene::CreateInstructions()
     // Construct new Text object, set string to display and font to use
     Text* instructionText = ui->GetRoot()->CreateChild<Text>();
     instructionText->SetColor(Color::GREEN);
-    instructionText->SetText("Q to cycle sequence images");
+    instructionText->SetText("<- Q and E ->");
     instructionText->SetFont(cache->GetResource<Font>("Fonts/Anonymous Pro.ttf"), 15);
 
     // Position the text relative to the screen center
@@ -269,6 +271,21 @@ void StaticScene::HandleUpdate(StringHash eventType, VariantMap& eventData)
     // cycle sequence images
     Input* input = GetSubsystem<Input>();
     if (input->GetKeyPress(KEY_Q))
+    {
+        if (debounceTimer_.GetMSec(false) > 250)
+        {
+            nodeList_[nodeIdx_]->SetEnabled(false);
+            if (--nodeIdx_ > nodeList_.Size() )
+            {
+                nodeIdx_ = nodeList_.Size() - 1;
+            }
+            nodeList_[nodeIdx_]->SetEnabled(true);
+            nodeList_[nodeIdx_]->GetComponent<UVFrame>()->Reset();
+
+            debounceTimer_.Reset();
+        }
+    }
+    if (input->GetKeyPress(KEY_E))
     {
         if (debounceTimer_.GetMSec(false) > 250)
         {

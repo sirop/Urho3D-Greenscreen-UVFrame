@@ -3,7 +3,7 @@
 
 Description
 -----------------------------------------------------------------------------------
-Green Screen effect UVFrame class example.
+Green Screen effect UVFrame animation class example.  Originally I only had green screen effects but decided to also add black screen images as well.
 
 
 To Build
