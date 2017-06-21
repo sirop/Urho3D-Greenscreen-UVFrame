@@ -158,6 +158,7 @@ void StaticScene::CreateSequencers()
     nodeList_.Push(CreateUVFrame("fire1_", "UVFrame/Sequences/bigfire/bigfire",      Vector2(3.0f, 3.0f)));
     nodeList_.Push(CreateUVFrame("expl1_", "UVFrame/Sequences/explosion1/explosion", Vector2(3.0f, 3.0f)));
     nodeList_.Push(CreateUVFrame("expl2_", "UVFrame/Sequences/explosion2/explosion", Vector2(4.0f, 3.0f)));
+    nodeList_.Push(CreateUVFrame("expl3_", "UVFrame/Sequences/explosion3/explosion", Vector2(4.0f, 3.0f)));
 
     nodeIdx_ = 0;
     nodeList_[nodeIdx_]->SetEnabled(true);
